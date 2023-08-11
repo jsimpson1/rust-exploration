@@ -21,7 +21,12 @@ Rust language exploration project
     * command line
         * check version
             * compiler
+              * rustc
                 * `rustc --version`
+                * compile
+                  * `rustc main.rs`
+                * run
+                  * `./main`
             * package manager
                 * `cargo --version`
         * update rust
