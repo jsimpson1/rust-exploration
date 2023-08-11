@@ -27,22 +27,23 @@ Rust language exploration project
                   * `rustc main.rs`
                 * run
                   * `./main`
-            * package manager
-                * `cargo --version`
         * update rust
             * `rustup update`
-        * cargo
-            * `cargo build`
-                * optimized for rebuilding
-                * compiles and generates executables
-                * executables are in `target/debug`
-            * `cargo build --release`
-                * optimized for run speed
-                * executables are in `target/release`
-            * `cargo run`
-                * complies and runs
-            * `cargo check`
-                * compiles and does not generates executables
+        * package manager aka `cargo`
+          * `cargo --version`
+          * initialize project
+            * `cargo init .`
+          * `cargo build`
+              * optimized for rebuilding
+              * compiles and generates executables
+              * executables are in `target/debug`
+          * `cargo build --release`
+              * optimized for run speed
+              * executables are in `target/release`
+          * `cargo run`
+              * complies and runs
+          * `cargo check`
+              * compiles and does not generates executables
         * crates
             * https://crates.io/crates/rand
     * intellij
