@@ -44,7 +44,7 @@ fn main() {
 
     println!("calories_per_elf={:?}", &calories_per_elf);
 
-    let per_elf_total_calories =
+    let mut per_elf_total_calories =
         calories_per_elf
             .clone()
             .into_iter()
@@ -75,5 +75,20 @@ fn main() {
         },
         None => println!("Should not happen"),
     }
+
+    per_elf_total_calories.sort_by(|a, b| b.cmp(a));
+
+    let top_3 =
+        per_elf_total_calories
+            .iter()
+            .take(3)
+            .collect::<Vec<_>>();
+
+    let sum_of_top_3 =
+        top_3
+            .into_iter()
+            .sum::<i32>();
+
+    println!("sum_of_top_3 {}", sum_of_top_3)
 
 }
