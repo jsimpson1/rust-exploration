@@ -1,3 +1,4 @@
+
 fn main() {
 
     // initial input
@@ -25,34 +26,43 @@ fn main() {
             .collect::<Vec<_>>();
     println!("elf_calories={:?}", elf_calories);
 
-    let elf_total_calories =
+    let calories_per_elf =
         elf_calories
             .iter()
-            .map(|calorieStr|
-                calorieStr
+            .map(|calorie_str|
+                calorie_str
                     .split_whitespace()
                     .collect::<Vec<_>>()
             )
             .collect::<Vec<_>>();
 
-    println!("elf_total_calories={:?}", &elf_total_calories);
+    println!("calories_per_elf={:?}", &calories_per_elf);
 
-    let elf_totals =
-        elf_total_calories
+    let per_elf_total_calories =
+        calories_per_elf
             .into_iter()
-            .flat_map(|calories| {
+            .map(|calories| {
                 let total =
                     calories
                         .into_iter()
                         .map(|c|
                             c.parse::<i32>().unwrap()
                         )
-                        .collect::<Vec<_>>()
-                        .into_iter()
-                        .sum::<i32>();
+                        .collect::<Vec<_>>();
                 total
+            }).map(|calories| {
+                calories.iter().sum::<i32>()
             })
+            .into_iter()
             .collect::<Vec<_>>();
 
-    println!("elf_totals={:?}", &elf_totals);
+    println!("per_elf_total_calories={:?}", &per_elf_total_calories);
+
+    let max_calories_carried_by_elf = per_elf_total_calories.iter().max();
+
+    match max_calories_carried_by_elf {
+        Some(max_value) => println!("max calories {}", max_value),
+        None => println!("Should not happen"),
+    }
+
 }
