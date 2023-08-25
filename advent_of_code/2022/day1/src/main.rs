@@ -61,7 +61,11 @@ fn main() {
     let max_calories_carried_by_elf = per_elf_total_calories.iter().max();
 
     match max_calories_carried_by_elf {
-        Some(max_value) => println!("max calories {}", max_value),
+        Some(max_value) => {
+            println!("max calories {}", max_value.clone());
+            let expected: &i32 = &24000;
+            assert_eq!(max_value, expected)
+        },
         None => println!("Should not happen"),
     }
 
