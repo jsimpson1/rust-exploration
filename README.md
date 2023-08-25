@@ -48,3 +48,9 @@ Rust language exploration project
             * https://crates.io/crates/rand
     * intellij
         * you need to refresh cargo when pulling new crates / modules
+
+### Advent of code
+* https://adventofcode.com/
+* 2022
+  * day 1
+    * 
