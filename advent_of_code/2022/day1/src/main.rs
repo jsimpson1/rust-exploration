@@ -1,33 +1,39 @@
-
+use std::fs;
 fn main() {
 
     // initial input
-    let calories_input =
-"1000
-2000
-3000
+//     let calories_input =
+// "1000
+// 2000
+// 3000
+//
+// 4000
+//
+// 5000
+// 6000
+//
+// 7000
+// 8000
+// 9000
+//
+// 10000";
 
-4000
+    let contents = fs::read_to_string("./input").expect("Should have been able to read the file");
 
-5000
-6000
-
-7000
-8000
-9000
-
-10000";
+    let calories_input: &str = contents.trim();
 
     println!("calories_input={}", calories_input);
 
     let elf_calories =
         calories_input
+            .clone()
             .split("\n\n")
             .collect::<Vec<_>>();
     println!("elf_calories={:?}", elf_calories);
 
     let calories_per_elf =
         elf_calories
+            .clone()
             .iter()
             .map(|calorie_str|
                 calorie_str
@@ -40,6 +46,7 @@ fn main() {
 
     let per_elf_total_calories =
         calories_per_elf
+            .clone()
             .into_iter()
             .map(|calories| {
                 let total =
@@ -63,8 +70,8 @@ fn main() {
     match max_calories_carried_by_elf {
         Some(max_value) => {
             println!("max calories {}", max_value.clone());
-            let expected: &i32 = &24000;
-            assert_eq!(max_value, expected)
+            // let expected: &i32 = &24000;
+            // assert_eq!(max_value, expected)
         },
         None => println!("Should not happen"),
     }
