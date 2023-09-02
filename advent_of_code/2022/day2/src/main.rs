@@ -1,10 +1,15 @@
-use std::cmp::Ordering;
 use std::fs;
 
 const ROCK: u32 = 1;
 const PAPER: u32 = 2;
 const SCISSOR: u32 = 3;
+const O_ROCK: char = 'A';
+const O_PAPER: char = 'B';
+const O_SCISSOR: char = 'C';
 
+const S_ROCK: char = 'X';
+const S_PAPER: char = 'Y';
+const S_SCISSOR: char = 'Z';
 fn main() {
 
 //     let input =
@@ -17,63 +22,55 @@ fn main() {
     let result = solve_puzzle(input.trim());
     println!("result={result}")
 }
-
-fn opponent_shape_score(choice: char) -> u32 {
-    match choice {
-        'A' => ROCK,
-        'B' => PAPER,
-        'C' => SCISSOR,
-        _ => 0
-    }
-}
-
+const LOSS_SCORE: u32 = 0;
+const DRAW_SCORE: u32 = 3;
+const WIN_SCORE: u32 = 6;
 fn self_shape_score(choice: char) -> u32 {
     match choice {
-        'X' => ROCK,
-        'Y' => PAPER,
-        'Z' => SCISSOR,
+        'X' => LOSS_SCORE,
+        'Y' => DRAW_SCORE,
+        'Z' => WIN_SCORE,
         _ => 0
     }
 }
 
-const O_ROCK: char = 'A';
-const O_PAPER: char = 'B';
-const O_SCISSOR: char = 'C';
-
-const S_ROCK: char = 'X';
-const S_PAPER: char = 'Y';
-const S_SCISSOR: char = 'Z';
+const LOSS: char = 'X';
+const DRAW: char = 'Y';
+const WIN: char = 'Z';
 
 fn outcome_score(self_choice: char, opponent_choice: char) -> u32 {
+    let result: u32 = match (opponent_choice, self_choice ) {
+        (O_ROCK, LOSS) => SCISSOR,
+        (O_ROCK, DRAW) => ROCK,
+        (O_ROCK, WIN) => PAPER,
+        (O_PAPER, LOSS) => ROCK,
+        (O_PAPER, DRAW) => PAPER,
+        (O_PAPER, WIN) => SCISSOR,
+        (O_SCISSOR, LOSS) => PAPER,
+        (O_SCISSOR, DRAW) => SCISSOR,
+        (O_SCISSOR, WIN) => ROCK,
+        _ => {
+            // println!("default");
+            0
+        }
+    };
+    // println!("opponent_choice={opponent_choice}, self_choice={self_choice}, result={result}");
+    result
 
-    match (self_choice, opponent_choice) {
-        (S_ROCK, O_ROCK) => 3,
-        (S_ROCK, O_PAPER) => 0,
-        (S_ROCK, O_SCISSOR) => 6,
-        (S_PAPER, O_PAPER) => 3,
-        (S_PAPER, O_ROCK) => 6,
-        (S_PAPER, O_SCISSOR) => 0,
-        (S_SCISSOR, O_SCISSOR) => 3,
-        (S_SCISSOR, O_ROCK) => 0,
-        (S_SCISSOR, O_PAPER) => 6,
-        _ => 0
-    }
 }
 
 fn round_score(
     line: &str
 ) -> u32 {
-    // println!("line={line}");
     let character: Vec<char> = line.trim().chars().collect();
     let opponent_choice = character[0];
     let self_choice = character[2];
-    // println!("opponent_choice={opponent_choice}, self_choice={self_choice}");
+
     let s_shape_score = self_shape_score(self_choice);
-    // println!("o_shape_score={o_shape_score}, s_shape_score={s_shape_score}");
+
     let round_outcome = outcome_score(self_choice, opponent_choice);
-    // println!("round_outcome={round_outcome}");
+
     let total_score = round_outcome + s_shape_score;
-    // println!("total_score={total_score}");
 
     total_score
 }
