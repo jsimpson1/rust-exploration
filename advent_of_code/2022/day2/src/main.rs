@@ -12,10 +12,8 @@ const S_PAPER: char = 'Y';
 const S_SCISSOR: char = 'Z';
 fn main() {
 
-//     let input =
-// "A Y
-// B X
-// C Z";
+
+
 
     let input = fs::read_to_string("input.txt").expect("Should have been able to read the file");
 
