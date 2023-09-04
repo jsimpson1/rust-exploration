@@ -21,10 +21,38 @@ fn get_input(part: u32) -> String {
 
 fn calculate_items_sum(input: String) -> usize {
     let rucksacks = input.split("\n").collect::<Vec<&str>>();
-    calculate_sum_for_rucksacks(rucksacks)
+    // part1_calculate_sum_for_rucksacks(rucksacks)
+    part2_calculate_sum_for_rucksacks(rucksacks)
 }
 
-fn calculate_sum_for_rucksacks(rucksacks: Vec<&str>) -> usize {
+fn part2_calculate_sum_for_rucksacks(rucksacks: Vec<&str>) -> usize {
+    let chunks = rucksacks.chunks(3).collect::<Vec<_>>();
+    chunks
+        .iter()
+        .fold(
+            0,
+            |acc, &chunk| acc +  calculate_rucksack_group_value(chunk)
+        )
+}
+
+fn calculate_rucksack_group_value(chunk: &[&str]) -> usize {
+    let set1 = chunk[0].chars().collect::<Vec<_>>();
+    let set2 = chunk[1].chars().collect::<Vec<_>>();
+    let set3 = chunk[2].chars().collect::<Vec<_>>();
+
+    let sets = [set2, set3];
+    let filtered_items = set1
+        .iter()
+        .filter(|item|
+            sets.iter().all(|a|
+                a.contains(item)
+            )
+        ).collect::<Vec<_>>();
+    let item = filtered_items[0].clone();
+    get_priority_value(item)
+}
+
+fn part1_calculate_sum_for_rucksacks(rucksacks: Vec<&str>) -> usize {
     rucksacks
         .iter()
         .fold(
