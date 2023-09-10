@@ -1,19 +1,14 @@
-use std::fs;
+extern crate utilities;
 
-const PUZZLE_PART: u32 = 1;
+use utilities::import;
+
+const PUZZLE_PATH: &str = "inputs/input_part0.txt";
 
 fn main() {
-    let input = get_input(PUZZLE_PART);
+    let input = import::get_input(PUZZLE_PATH);
     println!("input:\n{}", input);
     let overlap_pairs = get_overlap_pairs(input);
     println!("overlap_pairs={}", overlap_pairs);
-}
-
-fn get_input(part: u32) -> String {
-    let input_file_name = format!("src/input_part{}.txt", part);
-    let message = format!("Should be getting input from a file: {}", input_file_name);
-    let input = fs::read_to_string(input_file_name).expect(&message);
-    input
 }
 
 fn get_overlap_pairs(input: String) -> usize {
