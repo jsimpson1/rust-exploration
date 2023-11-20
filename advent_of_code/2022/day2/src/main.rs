@@ -11,12 +11,7 @@ const S_ROCK: char = 'X';
 const S_PAPER: char = 'Y';
 const S_SCISSOR: char = 'Z';
 fn main() {
-
-
-
-
     let input = fs::read_to_string("input.txt").expect("Should have been able to read the file");
-
     let result = solve_puzzle(input.trim());
     println!("result={result}")
 }
