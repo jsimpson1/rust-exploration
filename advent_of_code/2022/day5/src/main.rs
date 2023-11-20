@@ -70,7 +70,7 @@ fn move_crates(stack: HashMap<u32, Vec<char>>, move_command: &str) -> HashMap<u3
                     let last_n_index = source_stack.len() - num_of_crates_to_move as usize;
                     let source_stack_split = source_stack.split_at(last_n_index);
                     let mut source_crates_to_move = source_stack_split.1.to_vec();
-                    source_crates_to_move.reverse();
+                    // source_crates_to_move.reverse();
                     let new_target_stack = [target_stack.to_vec(), source_crates_to_move].concat();
                     new_stack.insert(to_key, new_target_stack);
                     // remaining source
