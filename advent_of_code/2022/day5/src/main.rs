@@ -3,7 +3,8 @@ extern crate utilities;
 use std::collections::{HashMap};
 use utilities::import;
 
-const PATH: &str = "inputs/input0.txt";
+// const PATH: &str = "inputs/input0.txt";
+const PATH: &str = "inputs/input1.txt";
 
 fn main() {
     let input = import::get_input(PATH);
