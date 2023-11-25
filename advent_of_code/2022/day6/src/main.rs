@@ -13,7 +13,7 @@ fn main() {
 
 fn find_index_from_datastream_buffer(datastream: &str) -> usize {
     let characters: Vec<char> = datastream.chars().collect();
-    let marker_size = 4;
+    let marker_size = 14;
     let max_index = characters.len() - marker_size;
 
     for index in 0..max_index {
