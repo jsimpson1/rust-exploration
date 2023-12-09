@@ -76,10 +76,18 @@ mod tests {
     use super::*;
 
     #[test]
-    fn base_case() {
+    fn part_1_base_case() {
         let input = import::get_input("inputs/input0.txt");
         let actual = part_1_calculation(&input);
         let expected: usize = 95437;
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn part_1_case() {
+        let input = import::get_input("inputs/input1.txt");
+        let actual = part_1_calculation(&input);
+        let expected: usize = 1989474;
         assert_eq!(actual, expected);
     }
 
