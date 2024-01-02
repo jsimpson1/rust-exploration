@@ -2,6 +2,16 @@ use utilities::import;
 use itertools::Itertools;
 
 fn main() {
+    case_1();
+}
+
+fn case_1(){
+    let input = import::get_input("inputs/case_1.txt");
+    println!("input=\n{}", input);
+    let num_of_visible_trees = calculate_visible_trees(&input);
+    println!("num_of_visible_trees={}", num_of_visible_trees)
+}
+fn base_case() {
     let base_case_input = import::get_input("inputs/base_case.txt");
     println!("base_case_input=\n{}", base_case_input);
     let base_case_num_of_visible_trees = calculate_visible_trees(&base_case_input);
@@ -20,8 +30,8 @@ fn calculate_visible_trees(input: &str) -> usize {
     let matrix_data = parse_to_matrix_of_numbers(input);
     let column_length = matrix_data.len();
     let row_length = matrix_data[0].len();
-    println!("column_length={}", column_length);
-    println!("row_length={}", row_length);
+    // println!("column_length={}", column_length);
+    // println!("row_length={}", row_length);
     let x_coordinates: Vec<usize> = (0..row_length).collect();
     let y_coordinates: Vec<usize> = (0..column_length).collect();
     let visible_tree_number = x_coordinates
@@ -32,7 +42,7 @@ fn calculate_visible_trees(input: &str) -> usize {
             let y = coordinate.1;
             println!("(x,y)=({}, {}) - accum={}", &x, &y, accum);
             let is_edge= is_tree_on_edge(&x, &y, row_length, column_length);
-            println!("is_edge={}", is_edge);
+            // println!("is_edge={}", is_edge);
             if is_edge {
                 let next_sum = accum + 1;
                 return next_sum
@@ -40,27 +50,27 @@ fn calculate_visible_trees(input: &str) -> usize {
             // println!("matrix_data={:?}", matrix_data);
             let row_data = &matrix_data[y];
             let is_left_visible = is_tree_visible_from_left(&x, row_data);
-            println!("is_left_visible={}", is_left_visible);
+            // println!("is_left_visible={}", is_left_visible);
             if  is_left_visible {
                 let next_sum = accum + 1;
                 return next_sum
             }
             let is_right_visible = is_tree_visible_from_right(&x, row_data);
-            println!("is_right_visible={}", is_right_visible);
+            // println!("is_right_visible={}", is_right_visible);
             if is_right_visible {
                 let next_sum = accum + 1;
                 return next_sum
             }
             let column_data = get_column_data(&x, &matrix_data);
             let is_top_visible = is_tree_visible_from_top(&y, &column_data);
-            println!("is_top_visible={}", is_top_visible);
+            // println!("is_top_visible={}", is_top_visible);
             if is_top_visible {
                 let next_sum = accum + 1;
                 return next_sum
             }
 
             let is_bottom_visible = is_tree_visible_from_bottom(&y, &column_data);
-            println!("is_bottom_visible={}", is_bottom_visible);
+            // println!("is_bottom_visible={}", is_bottom_visible);
             if is_bottom_visible {
                 let next_sum = accum + 1;
                 return next_sum
